@@ -4,68 +4,388 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Links</title>
+
+  <meta name="theme-color" content="#0b0f1a" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="icon" href="/icons/icon-192.png" />
+
   <style>
-    :root { color-scheme: light; }
-    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 0; padding: 0; background: #f7f7fb; }
-    header { padding: 16px 20px; background: white; border-bottom: 1px solid #e9e9f2; display:flex; gap:12px; align-items:center; justify-content:space-between; }
-    h1 { margin: 0; font-size: 18px; }
-    main { padding: 18px 20px; max-width: 980px; margin: 0 auto; }
-    .grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
-    .card { background: white; border: 1px solid #e9e9f2; border-radius: 14px; padding: 14px; box-shadow: 0 1px 0 rgba(0,0,0,.03); }
-    .title { font-weight: 700; margin: 0 0 6px 0; }
-    .cat { font-size: 12px; opacity: .7; margin-bottom: 10px; }
-    a.btn { display:inline-block; text-decoration:none; padding: 10px 12px; border-radius: 10px; border: 1px solid #dfe0f2; background: #fafafe; }
-    .row { display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
-    button { cursor:pointer; border:1px solid #dfe0f2; background:white; border-radius:10px; padding:9px 12px; }
-    button.primary { background:#111827; color:white; border-color:#111827; }
-    button.danger { background:#fee2e2; border-color:#fecaca; }
-    input, select { width: 100%; box-sizing:border-box; padding: 10px 12px; border-radius: 10px; border:1px solid #dfe0f2; background:white; }
-    label { font-size: 12px; opacity:.75; display:block; margin: 10px 0 6px; }
-    .muted { opacity:.75; font-size: 12px; }
-    .hidden { display:none !important; }
-    .backdrop { position:fixed; inset:0; background: rgba(0,0,0,.35); display:flex; align-items:center; justify-content:center; padding:18px; }
-    .modal { width: min(520px, 100%); background:white; border-radius: 16px; border:1px solid #e9e9f2; padding: 14px; }
-    .modal h2 { margin: 6px 0 6px; font-size: 16px; }
-    .modal .actions { display:flex; gap:10px; justify-content:flex-end; margin-top: 12px; }
-    .pill { font-size:12px; padding:4px 8px; border-radius:999px; border:1px solid #dfe0f2; background:#fafafe; }
+    :root{
+      color-scheme: dark;
+      --bg0:#070a12;
+      --bg1:#0b0f1a;
+      --card:rgba(255,255,255,.04);
+      --card2:rgba(255,255,255,.06);
+      --stroke:rgba(255,255,255,.10);
+      --stroke2:rgba(255,255,255,.14);
+      --text:#e7eaf3;
+      --muted:rgba(231,234,243,.72);
+      --muted2:rgba(231,234,243,.56);
+      --shadow: 0 16px 60px rgba(0,0,0,.55);
+      --shadow2: 0 10px 30px rgba(0,0,0,.45);
+      --radius:18px;
+      --radius2:14px;
+      --accent:#7c5cff;
+      --accent2:#22d3ee;
+      --danger:#ff4d4d;
+      --ok:#2ee59d;
+      --focus: 0 0 0 3px rgba(124,92,255,.28);
+      --grid: minmax(260px, 1fr);
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background:
+        radial-gradient(900px 520px at 16% 12%, rgba(124,92,255,.20), transparent 60%),
+        radial-gradient(900px 520px at 86% 34%, rgba(34,211,238,.14), transparent 55%),
+        radial-gradient(700px 520px at 50% 95%, rgba(124,92,255,.10), transparent 60%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      color:var(--text);
+    }
+    a{color:inherit}
+    .wrap{max-width:1100px; margin:0 auto; padding:22px 20px 40px}
+    header{
+      position:sticky; top:0; z-index:10;
+      backdrop-filter:saturate(150%) blur(14px);
+      background: linear-gradient(180deg, rgba(7,10,18,.76), rgba(7,10,18,.55));
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    .topbar{
+      max-width:1100px; margin:0 auto;
+      padding:14px 20px;
+      display:flex; align-items:center; justify-content:space-between; gap:16px;
+    }
+    .brand{display:flex; align-items:center; gap:12px; min-width:240px}
+    .logo{
+      width:38px; height:38px; border-radius:14px;
+      background:
+        radial-gradient(16px 16px at 30% 25%, rgba(124,92,255,.9), transparent 60%),
+        radial-gradient(18px 18px at 68% 60%, rgba(34,211,238,.8), transparent 62%),
+        rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow: 0 10px 30px rgba(0,0,0,.35);
+      display:grid; place-items:center;
+    }
+    .logo svg{opacity:.9}
+    h1{font-size:16px; margin:0; letter-spacing:.3px}
+    .sub{font-size:12px; color:var(--muted2); margin-top:1px}
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      color:var(--muted);
+      white-space:nowrap;
+    }
+    .pill.dot::before{
+      content:"";
+      width:8px;height:8px;border-radius:999px;
+      background: rgba(231,234,243,.55);
+    }
+    .pill.super{border-color: rgba(124,92,255,.35); background: rgba(124,92,255,.10); color: rgba(231,234,243,.92)}
+    .pill.super.dot::before{background: var(--accent)}
+    .actions{display:flex; align-items:center; gap:10px; flex-wrap:wrap; justify-content:flex-end}
+    button, input, select{
+      font: inherit;
+      color: var(--text);
+    }
+    button{
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      padding:9px 12px;
+      border-radius:12px;
+      cursor:pointer;
+      box-shadow: 0 8px 22px rgba(0,0,0,.25);
+      transition: transform .12s ease, border-color .12s ease, background .12s ease, box-shadow .12s ease;
+    }
+    button:hover{transform: translateY(-1px); border-color: rgba(255,255,255,.20); background: rgba(255,255,255,.08)}
+    button:active{transform: translateY(0px)}
+    button.primary{
+      border-color: rgba(124,92,255,.55);
+      background: linear-gradient(180deg, rgba(124,92,255,.24), rgba(124,92,255,.12));
+    }
+    button.danger{
+      border-color: rgba(255,77,77,.55);
+      background: linear-gradient(180deg, rgba(255,77,77,.22), rgba(255,77,77,.10));
+    }
+    button.ghost{background: transparent; box-shadow:none}
+    button.icon{
+      padding:9px 10px;
+      display:inline-flex; align-items:center; gap:10px;
+    }
+    .hidden{display:none !important}
+
+    .panel{
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow2);
+      overflow:hidden;
+    }
+    .panel-h{
+      display:flex; align-items:center; justify-content:space-between; gap:14px;
+      padding:14px 14px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.03);
+    }
+    .panel-h .h-title{display:flex; flex-direction:column; gap:2px}
+    .panel-h .h-title .t{font-weight:800; letter-spacing:.2px}
+    .panel-h .h-title .m{color:var(--muted2); font-size:12px}
+    .filters{
+      padding:14px;
+      display:grid;
+      grid-template-columns: 1.2fr .8fr auto;
+      gap:10px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.02);
+    }
+    @media (max-width: 760px){
+      .filters{grid-template-columns: 1fr; }
+      .brand{min-width:auto}
+      .actions{width:100%}
+      .topbar{flex-wrap:wrap}
+    }
+    .field{
+      display:flex; align-items:center; gap:10px;
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+    }
+    .field input, .field select{
+      width:100%;
+      border:0; outline:none;
+      background:transparent;
+    }
+    .field:focus-within{box-shadow: var(--focus); border-color: rgba(124,92,255,.38)}
+    .muted{color:var(--muted); font-size:13px}
+    #status{margin: 10px 0 14px 0}
+
+    .grid{display:grid; grid-template-columns: repeat(auto-fill, var(--grid)); gap:12px; padding:14px}
+    .card{
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      border-radius: var(--radius2);
+      padding:14px;
+      box-shadow: 0 12px 40px rgba(0,0,0,.35);
+      transition: transform .12s ease, border-color .12s ease, background .12s ease;
+      overflow:hidden;
+      position:relative;
+    }
+    .card:hover{transform: translateY(-2px); border-color: rgba(255,255,255,.18); background: rgba(255,255,255,.055)}
+    .card::before{
+      content:"";
+      position:absolute; inset:-1px;
+      background: radial-gradient(320px 180px at 20% 0%, rgba(124,92,255,.16), transparent 60%),
+                  radial-gradient(320px 180px at 90% 80%, rgba(34,211,238,.10), transparent 60%);
+      opacity:.8;
+      pointer-events:none;
+    }
+    .card > *{position:relative}
+    .title{font-weight:850; margin:0 0 6px 0; letter-spacing:.2px}
+    .cat{font-size:12px; color:var(--muted2); margin-bottom:12px; display:flex; align-items:center; gap:8px}
+    .chip{
+      display:inline-flex; align-items:center;
+      padding:4px 9px; border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      color: var(--muted);
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:8px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      padding:10px 12px;
+      border-radius:12px;
+      text-decoration:none;
+      transition: transform .12s ease, border-color .12s ease, background .12s ease;
+    }
+    .btn:hover{transform: translateY(-1px); border-color: rgba(124,92,255,.32); background: rgba(124,92,255,.10)}
+    .btn:active{transform: translateY(0px)}
+    .btn small{color:var(--muted2); font-family:var(--mono)}
+    .empty{
+      padding:14px; color:var(--muted2);
+    }
+
+    /* Admin list */
+    .adminList{padding: 14px; display:grid; gap:10px}
+    .row{
+      display:flex; align-items:flex-start; justify-content:space-between; gap:12px;
+    }
+    .adminMeta{color:var(--muted2); font-size:12px; margin-top:2px}
+    .mono{font-family: var(--mono); font-size:12px; color: var(--muted2); word-break: break-all}
+    .badge{
+      display:inline-flex; align-items:center; gap:8px;
+      font-size:12px; padding:6px 10px; border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      color: var(--muted);
+      white-space:nowrap;
+    }
+    .badge.inactive{border-color: rgba(255,77,77,.35); background: rgba(255,77,77,.10); color: rgba(255,255,255,.90)}
+    .badge.active{border-color: rgba(46,229,157,.30); background: rgba(46,229,157,.10); color: rgba(255,255,255,.90)}
+
+    /* Modals */
+    .backdrop{
+      position:fixed; inset:0; z-index:50;
+      background: rgba(0,0,0,.62);
+      display:flex; align-items:center; justify-content:center;
+      padding: 18px;
+    }
+    .modal{
+      width:min(520px, 100%);
+      border-radius: 20px;
+      border:1px solid rgba(255,255,255,.12);
+      background:
+        radial-gradient(520px 280px at 20% 0%, rgba(124,92,255,.18), transparent 60%),
+        radial-gradient(520px 280px at 90% 100%, rgba(34,211,238,.10), transparent 60%),
+        rgba(11,15,26,.92);
+      box-shadow: var(--shadow);
+      padding: 16px;
+    }
+    .modal h2{margin:2px 0 8px 0; font-size:16px}
+    label{display:block; font-size:12px; color: var(--muted2); margin-top:10px}
+    input, select{
+      width:100%;
+      margin-top:6px;
+      padding:10px 12px;
+      border-radius: 12px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      outline:none;
+    }
+    input:focus, select:focus{box-shadow: var(--focus); border-color: rgba(124,92,255,.38)}
+    .modal .actions{justify-content:flex-end; margin-top:14px}
+
+    /* Toasts */
+    .toasts{
+      position:fixed; right:16px; bottom:16px; z-index:60;
+      display:flex; flex-direction:column; gap:10px;
+      width:min(360px, calc(100vw - 32px));
+    }
+    .toast{
+      border-radius: 16px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      box-shadow: 0 18px 50px rgba(0,0,0,.55);
+      padding: 12px 12px;
+      display:flex; gap:10px; align-items:flex-start;
+      animation: pop .18s ease-out;
+    }
+    @keyframes pop{from{transform:translateY(6px); opacity:0} to{transform:translateY(0); opacity:1}}
+    .toast .k{width:10px; height:10px; border-radius:99px; margin-top:6px; background: rgba(231,234,243,.45)}
+    .toast.ok .k{background: var(--ok)}
+    .toast.err .k{background: var(--danger)}
+    .toast .txt{flex:1}
+    .toast .txt .t{font-weight:800; font-size:13px}
+    .toast .txt .m{color: var(--muted2); font-size:12px; margin-top:2px; line-height:1.35}
+    .toast .x{border:0; background:transparent; padding:4px 6px; box-shadow:none; opacity:.8}
+    .toast .x:hover{opacity:1}
   </style>
 </head>
+
 <body>
 <header>
-  <div class="row">
-    <h1>Links</h1>
-    <span id="modePill" class="pill hidden">SUPERADMIN</span>
-  </div>
-  <div class="row">
-    <button id="adminBtn">Admin</button>
-    <button id="logoutBtn" class="hidden">Esci</button>
+  <div class="topbar">
+    <div class="brand">
+      <div class="logo" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+          <path d="M10.5 13.5l3-3" stroke="rgba(231,234,243,.9)" stroke-width="2" stroke-linecap="round"/>
+          <path d="M7.6 14.7l-1.3 1.3a4 4 0 0 1-5.7-5.7l1.3-1.3a4 4 0 0 1 5.7 0" stroke="rgba(231,234,243,.9)" stroke-width="2" stroke-linecap="round"/>
+          <path d="M16.4 9.3l1.3-1.3a4 4 0 0 1 5.7 5.7l-1.3 1.3a4 4 0 0 1-5.7 0" stroke="rgba(231,234,243,.9)" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div>
+        <h1>Links</h1>
+        <div class="sub">Dashboard • accesso rapido</div>
+      </div>
+      <span id="modePill" class="pill dot super hidden">SUPERADMIN</span>
+    </div>
+
+    <div class="actions">
+      <button id="installBtn" class="icon hidden" title="Installa l'app">
+        Installa
+      </button>
+      <button id="adminBtn" class="icon">Admin</button>
+      <button id="logoutBtn" class="icon hidden">Esci</button>
+    </div>
   </div>
 </header>
 
-<main>
-  <div id="status" class="muted"></div>
-  <div id="linksGrid" class="grid" style="margin-top:12px;"></div>
+<div class="wrap">
 
-  <section id="adminPanel" class="hidden" style="margin-top:18px;">
-    <div class="card">
-      <div class="row" style="justify-content:space-between;">
-        <div>
-          <div class="title">Gestione Links</div>
-          <div class="muted">Solo SUPERADMIN può creare/modificare/eliminare e vedere inattivi.</div>
+  <div class="panel">
+    <div class="panel-h">
+      <div class="h-title">
+        <div class="t">Raccolta link</div>
+        <div class="m">Cerca, filtra per categoria e apri in un click.</div>
+      </div>
+      <div class="pill dot" id="countPill">0 link</div>
+    </div>
+
+    <div class="filters">
+      <div class="field" title="Cerca per titolo o categoria">
+        <span style="opacity:.65">⌕</span>
+        <input id="searchInput" placeholder="Cerca (es. fatture, CRM, cloud…)" autocomplete="off" />
+      </div>
+
+      <div class="field" title="Filtra per categoria">
+        <span style="opacity:.65">#</span>
+        <select id="catFilter">
+          <option value="">Tutte le categorie</option>
+        </select>
+      </div>
+
+      <button id="clearFiltersBtn" class="ghost" title="Reset filtri">Reset</button>
+    </div>
+
+    <div id="status" class="muted"></div>
+    <div id="linksGrid" class="grid"></div>
+    <div id="emptyState" class="empty hidden">Nessun link corrisponde ai filtri.</div>
+  </div>
+
+  <section id="adminPanel" class="hidden" style="margin-top:16px;">
+    <div class="panel">
+      <div class="panel-h">
+        <div class="h-title">
+          <div class="t">Gestione links</div>
+          <div class="m">Solo SUPERADMIN può creare/modificare/eliminare e vedere inattivi.</div>
         </div>
-        <button id="refreshAdminBtn">Aggiorna</button>
+        <div class="actions">
+          <button id="refreshAdminBtn">Aggiorna</button>
+          <button id="newLinkBtn" class="primary">Nuovo link</button>
+        </div>
       </div>
-      <div class="row" style="margin-top:12px;">
-        <button id="newLinkBtn" class="primary">Nuovo link</button>
+
+      <div class="filters" style="grid-template-columns: 1.2fr .8fr auto;">
+        <div class="field" title="Cerca in gestione">
+          <span style="opacity:.65">⌕</span>
+          <input id="adminSearchInput" placeholder="Cerca in gestione…" autocomplete="off" />
+        </div>
+        <div class="field" title="Filtra categoria (gestione)">
+          <span style="opacity:.65">#</span>
+          <select id="adminCatFilter">
+            <option value="">Tutte le categorie</option>
+          </select>
+        </div>
+        <button id="adminClearFiltersBtn" class="ghost">Reset</button>
       </div>
-      <div id="adminList" style="margin-top:12px;"></div>
+
+      <div id="adminList" class="adminList"></div>
     </div>
   </section>
-</main>
 
-<div id="adminModal" class="backdrop hidden" role="dialog" aria-modal="true">
+</div>
+
+<!-- KEY MODAL -->
+<div id="keyModal" class="backdrop hidden" role="dialog" aria-modal="true">
   <div class="modal">
-    <h2>Accesso Superadmin</h2>
+    <h2>Accesso SUPERADMIN</h2>
     <div class="muted">Inserisci la SUPERADMIN KEY. Non verrà mai inserita nell’URL.</div>
     <label for="keyInput">SUPERADMIN KEY</label>
     <input id="keyInput" type="password" placeholder="••••••••••••••••" />
@@ -76,15 +396,18 @@
   </div>
 </div>
 
+<!-- EDIT MODAL -->
 <div id="editModal" class="backdrop hidden" role="dialog" aria-modal="true">
   <div class="modal">
     <h2 id="editTitle">Modifica link</h2>
+
     <label>Titolo</label><input id="fTitle" />
     <label>Categoria</label><input id="fCat" />
-    <label>URL</label><input id="fUrl" />
+    <label>URL</label><input id="fUrl" placeholder="https://..." />
     <label>Ordine</label><input id="fOrder" type="number" />
     <label>Attivo</label>
     <select id="fActive"><option value="1">Sì</option><option value="0">No</option></select>
+
     <div class="actions">
       <button id="cancelEditBtn">Annulla</button>
       <button id="deleteBtn" class="danger hidden">Elimina</button>
@@ -93,119 +416,343 @@
   </div>
 </div>
 
+<div class="toasts" id="toasts" aria-live="polite" aria-relevant="additions"></div>
+
 <script>
   const API_BASE = "/api";
   const STORAGE_SUPER = "superadmin_key";
   const $ = (id) => document.getElementById(id);
+
+  let lastMe = null;
+  let publicItems = [];
+  let adminItems = [];
+
   function setStatus(msg) { $("status").textContent = msg || ""; }
+
+  function toast(title, message="", type="ok", ttl=3200){
+    const host = $("toasts");
+    const el = document.createElement("div");
+    el.className = "toast " + (type === "err" ? "err" : "ok");
+    el.innerHTML = `
+      <div class="k"></div>
+      <div class="txt">
+        <div class="t">${escapeHtml(title)}</div>
+        ${message ? `<div class="m">${escapeHtml(message)}</div>` : ""}
+      </div>
+      <button class="x" aria-label="Chiudi">✕</button>
+    `;
+    el.querySelector(".x").addEventListener("click", ()=> el.remove());
+    host.appendChild(el);
+    setTimeout(()=>{ el.remove(); }, ttl);
+  }
 
   async function apiFetch(path, { method="GET", body, query } = {}) {
     const url = new URL(API_BASE + path, location.origin);
     if (query) for (const [k,v] of Object.entries(query)) url.searchParams.set(k, v);
+
     const superKey = (localStorage.getItem(STORAGE_SUPER) || "").trim();
     const res = await fetch(url.toString(), {
       method,
-      headers: { "content-type":"application/json", ...(superKey ? {"x-superadmin-key": superKey} : {}) },
+      headers: {
+        "content-type":"application/json",
+        ...(superKey ? {"x-superadmin-key": superKey} : {})
+      },
       body: body ? JSON.stringify(body) : undefined
     });
+
     const data = await res.json().catch(() => ({}));
-    if (!res.ok) throw new Error(data?.error || `HTTP ${res.status}`);
+    if (!res.ok) {
+      const msg = data && (data.error || data.message) ? (data.error || data.message) : ("HTTP " + res.status);
+      throw new Error(msg);
+    }
     return data;
   }
 
-  function openModal(el){ el.classList.remove("hidden"); }
-  function closeModal(el){ el.classList.add("hidden"); }
   function isSuperadmin(me){ return me && me.role === "superadmin"; }
 
-  function escapeHtml(s){ return String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
+  function escapeHtml(s){
+    return String(s ?? "").replace(/[&<>"']/g, (c)=>({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
+  }
   function escapeAttr(s){ return escapeHtml(s).replace(/"/g,"&quot;"); }
 
-  function renderPublic(items){
-    const grid=$("linksGrid"); grid.innerHTML="";
+  function openModal(el){ el.classList.remove("hidden"); }
+  function closeModal(el){ el.classList.add("hidden"); }
+
+  function normalize(s){ return String(s||"").toLowerCase().trim(); }
+
+  function uniqueCategories(items){
+    const set = new Set();
     for(const it of items){
-      const card=document.createElement("div"); card.className="card";
-      card.innerHTML = `<div class="title">${escapeHtml(it.title)}</div>
-        <div class="cat">${escapeHtml(it.category||"")}</div>
-        <a class="btn" href="${escapeAttr(it.url)}" target="_blank" rel="noopener noreferrer">Apri</a>`;
+      const c = (it.category || "").trim();
+      if (c) set.add(c);
+    }
+    return Array.from(set).sort((a,b)=>a.localeCompare(b, "it"));
+  }
+
+  function fillCategorySelect(selectEl, items){
+    const cur = selectEl.value || "";
+    const cats = uniqueCategories(items);
+    selectEl.innerHTML = `<option value="">Tutte le categorie</option>` + cats.map(c=>`<option value="${escapeAttr(c)}">${escapeHtml(c)}</option>`).join("");
+    // try preserve
+    if (cats.includes(cur)) selectEl.value = cur;
+  }
+
+  function applyPublicFilters(){
+    const q = normalize($("searchInput").value);
+    const cat = $("catFilter").value;
+    const filtered = publicItems.filter(it=>{
+      const title = normalize(it.title);
+      const c = (it.category || "").trim();
+      const hay = title + " " + normalize(c);
+      const okQ = !q || hay.includes(q);
+      const okC = !cat || c === cat;
+      return okQ && okC;
+    });
+
+    renderPublic(filtered);
+    $("emptyState").classList.toggle("hidden", filtered.length !== 0);
+    $("countPill").textContent = `${filtered.length} link`;
+  }
+
+  function applyAdminFilters(){
+    const q = normalize($("adminSearchInput").value);
+    const cat = $("adminCatFilter").value;
+    const filtered = adminItems.filter(it=>{
+      const title = normalize(it.title);
+      const c = (it.category || "").trim();
+      const hay = title + " " + normalize(c) + " " + normalize(it.url);
+      const okQ = !q || hay.includes(q);
+      const okC = !cat || c === cat;
+      return okQ && okC;
+    });
+    renderAdminList(filtered);
+  }
+
+  function renderPublic(items){
+    const grid = $("linksGrid"); grid.innerHTML = "";
+    for(const it of items){
+      const card = document.createElement("div");
+      card.className = "card";
+      const category = (it.category || "").trim();
+      card.innerHTML = `
+        <div class="title">${escapeHtml(it.title)}</div>
+        <div class="cat">
+          ${category ? `<span class="chip">${escapeHtml(category)}</span>` : `<span class="chip">Senza categoria</span>`}
+          <span style="opacity:.55">•</span>
+          <span class="muted" style="font-size:12px;">${escapeHtml(new URL(it.url, location.origin).hostname || "")}</span>
+        </div>
+        <a class="btn" href="${escapeAttr(it.url)}" target="_blank" rel="noopener noreferrer">
+          Apri <small>↗</small>
+        </a>
+      `;
       grid.appendChild(card);
     }
   }
 
   function renderAdminList(items){
-    const wrap=$("adminList"); wrap.innerHTML="";
-    if(!items.length){ wrap.innerHTML=`<div class="muted">Nessun link.</div>`; return; }
+    const wrap = $("adminList"); wrap.innerHTML = "";
+    if(!items.length){
+      wrap.innerHTML = `<div class="empty">Nessun link.</div>`;
+      return;
+    }
     for(const it of items){
-      const row=document.createElement("div"); row.className="card"; row.style.marginBottom="10px";
-      row.innerHTML = `<div class="row" style="justify-content:space-between;">
-          <div>
-            <div class="title">${escapeHtml(it.title)} ${it.active ? "" : '<span class="pill">INATTIVO</span>'}</div>
-            <div class="muted">${escapeHtml(it.category||"")} • ordine ${it.sort_order}</div>
-            <div class="muted">${escapeHtml(it.url)}</div>
+      const row = document.createElement("div");
+      row.className = "card";
+      const category = (it.category || "").trim();
+      const state = it.active ? `<span class="badge active">Attivo</span>` : `<span class="badge inactive">Inattivo</span>`;
+      row.innerHTML = `
+        <div class="row">
+          <div style="min-width:0">
+            <div class="title" style="display:flex; gap:10px; align-items:center; flex-wrap:wrap">
+              <span>${escapeHtml(it.title)}</span>
+              ${state}
+            </div>
+            <div class="adminMeta">${escapeHtml(category || "Senza categoria")} • ordine ${escapeHtml(it.sort_order)}</div>
+            <div class="mono">${escapeHtml(it.url)}</div>
           </div>
-          <div class="row"><button data-edit="${it.id}">Modifica</button></div>
-        </div>`;
+          <div style="display:flex; gap:10px;">
+            <button data-edit="${it.id}">Modifica</button>
+          </div>
+        </div>
+      `;
       row.querySelector("[data-edit]").addEventListener("click", () => openEdit(it));
       wrap.appendChild(row);
     }
   }
 
-  let lastMe=null, adminItems=[];
   async function loadPublic(){
     setStatus("Caricamento…");
-    const data=await apiFetch("/links");
-    lastMe=data.me; renderPublic(data.items||[]);
-    setStatus(""); updateAdminVisibility();
+    const data = await apiFetch("/links");
+    lastMe = data.me;
+    publicItems = data.items || [];
+    fillCategorySelect($("catFilter"), publicItems);
+    applyPublicFilters();
+    setStatus("");
+    updateAdminVisibility();
   }
+
   async function loadAdmin(){
-    const data=await apiFetch("/links",{query:{all:1}});
-    lastMe=data.me; adminItems=data.items||[];
-    renderAdminList(adminItems); updateAdminVisibility();
+    const data = await apiFetch("/links", { query: { all: 1 } });
+    lastMe = data.me;
+    adminItems = data.items || [];
+    fillCategorySelect($("adminCatFilter"), adminItems);
+    applyAdminFilters();
+    updateAdminVisibility();
   }
+
   function updateAdminVisibility(){
-    const superMode=isSuperadmin(lastMe);
+    const superMode = isSuperadmin(lastMe);
     $("adminPanel").classList.toggle("hidden", !superMode);
     $("logoutBtn").classList.toggle("hidden", !superMode);
     $("modePill").classList.toggle("hidden", !superMode);
   }
 
-  $("adminBtn").addEventListener("click", ()=>{ $("keyInput").value=""; openModal($("adminModal")); setTimeout(()=>$("keyInput").focus(),50); });
-  $("closeModalBtn").addEventListener("click", ()=>closeModal($("adminModal")));
-  $("saveKeyBtn").addEventListener("click", async ()=>{
-    const key=($("keyInput").value||"").trim(); if(!key) return;
-    localStorage.setItem(STORAGE_SUPER, key); closeModal($("adminModal"));
-    try{ await loadAdmin(); await loadPublic(); }
-    catch(e){ localStorage.removeItem(STORAGE_SUPER); lastMe=null; updateAdminVisibility(); alert("Key non valida."); await loadPublic(); }
+  // Filters events
+  $("searchInput").addEventListener("input", applyPublicFilters);
+  $("catFilter").addEventListener("change", applyPublicFilters);
+  $("clearFiltersBtn").addEventListener("click", ()=>{
+    $("searchInput").value = "";
+    $("catFilter").value = "";
+    applyPublicFilters();
   });
-  $("logoutBtn").addEventListener("click", async ()=>{ localStorage.removeItem(STORAGE_SUPER); lastMe=null; updateAdminVisibility(); await loadPublic(); });
-  $("refreshAdminBtn").addEventListener("click", async ()=>{ try{ await loadAdmin(); }catch(e){ alert(e.message); } });
 
-  let editingId=null;
-  function openEdit(item){
-    editingId=item?.id ?? null;
+  $("adminSearchInput").addEventListener("input", applyAdminFilters);
+  $("adminCatFilter").addEventListener("change", applyAdminFilters);
+  $("adminClearFiltersBtn").addEventListener("click", ()=>{
+    $("adminSearchInput").value = "";
+    $("adminCatFilter").value = "";
+    applyAdminFilters();
+  });
+
+  // Admin key modal
+  $("adminBtn").addEventListener("click", ()=>{
+    $("keyInput").value = "";
+    openModal($("keyModal"));
+    setTimeout(()=> $("keyInput").focus(), 50);
+  });
+  $("closeModalBtn").addEventListener("click", ()=> closeModal($("keyModal")));
+  $("saveKeyBtn").addEventListener("click", async ()=>{
+    const key = $("keyInput").value.trim();
+    if(!key){ toast("Chiave mancante", "Inserisci la SUPERADMIN KEY.", "err"); return; }
+    localStorage.setItem(STORAGE_SUPER, key);
+    closeModal($("keyModal"));
+    try{
+      await loadAdmin();
+      toast("Accesso effettuato", "Modalità SUPERADMIN attiva.");
+    }catch(e){
+      localStorage.removeItem(STORAGE_SUPER);
+      toast("Accesso negato", e.message, "err");
+    }
+  });
+
+  $("logoutBtn").addEventListener("click", ()=>{
+    localStorage.removeItem(STORAGE_SUPER);
+    lastMe = null;
+    $("modePill").classList.add("hidden");
+    $("adminPanel").classList.add("hidden");
+    $("logoutBtn").classList.add("hidden");
+    toast("Uscito", "Modalità SUPERADMIN disattivata.");
+  });
+
+  $("refreshAdminBtn").addEventListener("click", async ()=>{
+    try{
+      await loadAdmin();
+      toast("Aggiornato", "Elenco admin aggiornato.");
+    }catch(e){
+      toast("Errore", e.message, "err");
+    }
+  });
+
+  // Edit modal logic (kept compatible with your API)
+  let editingId = null;
+
+  function openEdit(it){
+    editingId = it ? it.id : null;
     $("editTitle").textContent = editingId ? "Modifica link" : "Nuovo link";
-    $("fTitle").value=item?.title||""; $("fCat").value=item?.category||""; $("fUrl").value=item?.url||"";
-    $("fOrder").value=item?.sort_order ?? 0; $("fActive").value=item?.active ? "1":"0";
+    $("fTitle").value = it?.title || "";
+    $("fCat").value = it?.category || "";
+    $("fUrl").value = it?.url || "";
+    $("fOrder").value = (it?.sort_order ?? 0);
+    $("fActive").value = (it?.active ? "1" : "0");
     $("deleteBtn").classList.toggle("hidden", !editingId);
     openModal($("editModal"));
+    setTimeout(()=> $("fTitle").focus(), 50);
   }
-  $("newLinkBtn").addEventListener("click", ()=>openEdit(null));
-  $("cancelEditBtn").addEventListener("click", ()=>closeModal($("editModal")));
+
+  $("newLinkBtn").addEventListener("click", ()=> openEdit(null));
+  $("cancelEditBtn").addEventListener("click", ()=> closeModal($("editModal")));
+
   $("saveEditBtn").addEventListener("click", async ()=>{
-    const payload={ title:$("fTitle").value.trim(), category:$("fCat").value.trim(), url:$("fUrl").value.trim(),
-      sort_order: parseInt($("fOrder").value||"0",10)||0, active: $("fActive").value==="1" };
+    const payload = {
+      title: $("fTitle").value.trim(),
+      category: $("fCat").value.trim(),
+      url: $("fUrl").value.trim(),
+      sort_order: Number($("fOrder").value || 0),
+      active: $("fActive").value === "1"
+    };
     try{
-      if(!payload.title || !payload.url) return alert("Titolo e URL sono richiesti.");
-      if(!editingId) await apiFetch("/links",{method:"POST",body:payload});
-      else await apiFetch(`/links/${editingId}`,{method:"PUT",body:payload});
-      closeModal($("editModal")); await loadAdmin(); await loadPublic();
-    }catch(e){ alert(e.message); }
-  });
-  $("deleteBtn").addEventListener("click", async ()=>{
-    if(!editingId) return; if(!confirm("Eliminare questo link?")) return;
-    try{ await apiFetch(`/links/${editingId}`,{method:"DELETE"}); closeModal($("editModal")); await loadAdmin(); await loadPublic(); }
-    catch(e){ alert(e.message); }
+      if(!payload.title || !payload.url){
+        toast("Dati mancanti", "Titolo e URL sono richiesti.", "err");
+        return;
+      }
+      if(!editingId) await apiFetch("/links", { method:"POST", body: payload });
+      else await apiFetch(`/links/${editingId}`, { method:"PUT", body: payload });
+
+      closeModal($("editModal"));
+      await loadAdmin();
+      await loadPublic();
+      toast("Salvato", "Modifiche applicate.");
+    }catch(e){
+      toast("Errore", e.message, "err");
+    }
   });
 
-  loadPublic().catch(e=>setStatus("Errore: "+e.message));
+  $("deleteBtn").addEventListener("click", async ()=>{
+    if(!editingId) return;
+    if(!confirm("Eliminare questo link?")) return;
+    try{
+      await apiFetch(`/links/${editingId}`, { method:"DELETE" });
+      closeModal($("editModal"));
+      await loadAdmin();
+      await loadPublic();
+      toast("Eliminato", "Il link è stato rimosso.");
+    }catch(e){
+      toast("Errore", e.message, "err");
+    }
+  });
+
+  // PWA: service worker + install prompt
+  let deferredPrompt = null;
+
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", async () => {
+      try{
+        await navigator.serviceWorker.register("/sw.js");
+      }catch(e){
+        // silent
+      }
+    });
+  }
+
+  window.addEventListener("beforeinstallprompt", (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    $("installBtn").classList.remove("hidden");
+  });
+
+  $("installBtn").addEventListener("click", async ()=>{
+    if(!deferredPrompt) return;
+    deferredPrompt.prompt();
+    const choice = await deferredPrompt.userChoice.catch(()=>null);
+    deferredPrompt = null;
+    $("installBtn").classList.add("hidden");
+    if(choice && choice.outcome === "accepted") toast("Installazione", "Aggiunta alla schermata Home.");
+  });
+
+  loadPublic().catch(e=>{
+    setStatus("Errore: " + e.message);
+    toast("Errore", e.message, "err");
+  });
 </script>
-</body></html>
+</body>
+</html>
